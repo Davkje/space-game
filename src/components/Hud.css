@@ -1,0 +1,144 @@
+/*
+  HUD:en ligger som ett genomskinligt lager ovanpå hela canvasen.
+
+  pointer-events: none gör att musklick går RAKT IGENOM HUD:en ner till
+  canvasen. Annars skulle HUD:en "äta upp" alla klick. Knappen på
+  slutskärmen slår på det igen, så att den går att klicka på.
+*/
+.hud {
+	position: fixed;
+	inset: 0; /* = top: 0; right: 0; bottom: 0; left: 0; */
+	pointer-events: none;
+	font-family: ui-monospace, Consolas, monospace;
+	color: #fff;
+	text-shadow: 0 0 6px rgba(124, 255, 251, 0.6);
+}
+
+.hud-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px 24px;
+	font-size: 24px;
+}
+
+.hud-lives {
+	color: #ff6b9d;
+	letter-spacing: 4px;
+}
+
+.hud-time {
+	font-size: 32px;
+}
+
+.hud-help {
+	position: absolute;
+	bottom: 16px;
+	width: 100%;
+	text-align: center;
+	font-size: 13px;
+	opacity: 0.6;
+}
+
+/*
+  Gemensamt för startmenyn och slutskärmen: ett halvgenomskinligt lager
+  över hela skärmen, med innehållet centrerat. Man ser stjärnorna och
+  skeppet bakom.
+
+  Klassen används som "hud-overlay hud-start" – ett element kan ha flera
+  klasser, så vi lägger det gemensamma här och det unika i hud-start/hud-end.
+*/
+.hud-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	padding: 0 16px;
+	text-align: center;
+}
+
+.hud-overlay h1 {
+	margin: 0;
+	font-size: 56px;
+}
+
+.hud-overlay p {
+	margin: 0;
+	opacity: 0.85;
+}
+
+/* ── Startmenyn ── */
+.hud-start {
+	background: rgba(5, 5, 15, 0.45);
+}
+
+.hud-rules {
+	list-style: none;
+	margin: 16px 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	font-size: 15px;
+}
+
+/* <kbd> är HTML-elementet för tangenter */
+.hud-rules kbd {
+	padding: 2px 6px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 4px;
+	font-family: inherit;
+}
+
+.hud-rock {
+	color: #b8b3ad;
+}
+
+.hud-crystal {
+	color: #ff8a3d;
+}
+
+/*
+  En CSS-animation: @keyframes beskriver HUR det ändras (opacity 1 → 0.2),
+  och `animation` på elementet säger hur länge (1.2 s), i vilken takt och
+  att det ska upprepas för evigt, fram och tillbaka (alternate).
+*/
+.hud-blink {
+	margin-top: 8px !important;
+	font-size: 20px;
+	animation: blink 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes blink {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.2;
+	}
+}
+
+/* ── Slutskärmen ── */
+.hud-end {
+	background: rgba(5, 5, 15, 0.7);
+}
+
+.hud-end-score {
+	font-size: 24px;
+}
+
+.hud-end button {
+	pointer-events: auto;
+	margin-top: 16px;
+	padding: 12px 32px;
+	font: inherit;
+	font-size: 18px;
+	color: #05050f;
+	background: #7cfffb;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
